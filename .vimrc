@@ -101,16 +101,14 @@ noremap <LEADER>b :e ++enc=big5<CR>:set tenc=big5<CR>
 " 256-color scheme
 set t_Co=256
 syntax on
-"colorscheme ir_black
 colorscheme cpchang 
-"colorscheme yzlin256
 
 " show match {,[,( in yellow color
 set showmatch
 hi MatchParen ctermbg=YELLOW
 
 " Highlight HTML tag in php file
-"let php_htmlInStrings=1
+let php_htmlInStrings=1
 set cursorline 
 
 """"""""""""""""""""""""""""""
@@ -192,12 +190,6 @@ map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 " --- SuperTab
 let g:SuperTabDefaultCompletionType = "context"
-
-"set tags+=~/mtf.tags
-"set tags+=~/tagfiles/mtf.tags
-"set tags+=~/tagfiles/beceem_src.tags
-"set tags+=~/tagfiles/d2.tags
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Source Explorer
