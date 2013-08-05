@@ -1,0 +1,97 @@
+# no annoying audible bell
+vbell			off
+# vbell_msg	"Visual Bell~~~!" 
+# vbellwait	2
+msgwait		60
+bell_msg    "You got a bell in [%n] %t @ %c:%s"
+
+
+# for dynamic title (prompt end with '>')
+# shelltitle '> |tcsh'
+shelltitle '% |---'
+
+# 預設使用的 shell
+# for unknown reason, I have to mark it. Otherwise, 'script' command won't work
+shell			$SHELL
+
+# UTF-8 environment
+defutf8 on
+defencoding utf8
+defc1 off
+
+# # C-a b 轉 big5
+bind b encoding big5 utf8
+# # C-a u 轉 utf8
+bind u encoding utf8 utf8
+
+defscrollback	1000
+
+# Ctrl+Left & Ctrl+Right to traverse around
+bindkey ^[[1;5D prev
+bindkey ^[[1;5C next
+#bindkey \033[D prev
+#bindkey \033[C next
+
+# detach on hangup
+autodetach on
+
+# don't display the copyright page
+startup_message off
+
+# CJK ambiguous characters
+#cjkwidth on
+
+# set every new windows hardstatus line to somenthing descriptive
+# defhstatus "screen: ^En (^Et)"
+
+# erase background with current bg color
+defbce on
+
+# terminfo and termcap for nice 256 color terminal
+# tell screen how to set colors. AB = background, AF=foreground
+term xterm
+termcapinfo xterm "Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm"
+
+# allow bold colors - necessary for some reason
+attrcolor b ".I"
+attrcolor i "+b"
+
+# Screen anti-idle   ref:http://www.mhsin.org/screen/
+#antiidle_str "s"
+#defantiidle_str "s"
+
+#	Google Calendar agenda fetch
+#backtick 1 300 300 $HOME/screen_agenda
+
+# some notes on COLOR before explaining its use in
+# the commands caption, hardstatus, and sorendition.
+#
+# COLOR:  colors codes are combinations of
+# [attribute modifier] [color description]
+# the manual talks of "attribute/color modifiers".
+# see the manual, section "STRING ESCAPES".
+#
+# Color table:
+# 0 Black             .    leave color unchanged
+# 1 Red               b    blue
+# 2 Green             c    cyan
+# 3 Brown / yellow    d    default color
+# 4 Blue              g    green           b    bold
+# 5 Purple            k    black           B    blinking
+# 6 Cyan              m    magenta         d    dim
+# 7 White             r    red             r    reverse
+# 8 unused/illegal    w    white           s    standout
+# 9 transparent       y    yellow          u    underline
+#
+# note: "dim" is not mentioned in the manual.
+
+caption always "%{=b 5w} * %1` %{= bb} %48=%{+b bg}[%n] %t %{Y}in %{M}%e%{-} %= %{= wr}| %Y-%m-%d %c %{-}"
+#caption always "%{= bb} %{= kG}[ %1` ] %{-} %48=%{+b bY}[%n] %t in %{M}%e%{-} %= | %{= wr} %Y-%m-%d %c%{-}"
+hardstatus alwayslastline "%-Lw%{= Bw}%2n%f %t%{-}%+Lw %="
+
+# ------------------------------------------------------------------------------
+# Auto-Created Window
+# ------------------------------------------------------------------------------
+screen -t work-1
+screen -t work-2
+screen -t work-3
