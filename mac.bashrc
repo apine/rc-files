@@ -28,44 +28,10 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
 	debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# add git info prompt
-# Downliad git-prompt.sh here:
-# https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh
-#
-GIT_PS1_SHOWUPSTREAM="auto"
-GIT_PS1_SHOWCOLORHINTS="yes"
-source ~/.git-prompt.sh
+# bash history completion
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
 
-#export PROMPT_COMMAND='__git_ps1 "\u@\h:\W" "\\\$ ";'
-export PROMPT_COMMAND='__git_ps1 "[\[\033[00;31m\]\@ \[\033[00;36m\]\u@\h:\[\033[00;33m\]\w \[\033[00m\]]" "\\\$ ";'
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-	alias ls='ls --color=auto'
-	alias grep='grep --color=auto'
-	alias fgrep='fgrep --color=auto'
-	alias egrep='egrep --color=auto'
-fi
-
-# some more ls aliases
-alias rm="/bin/rm -i"
-alias tin="/usr/local/bin/tin -r"
-alias telnet="/usr/local/bin/zh-telnet"
-alias	"ptt"="telnet ptt.cc"
-alias	"ptt2"="telnet ptt2.cc"
-alias	"bs2"="telnet bs2.to"
-alias h='history'
-alias j='jobs -l'
-alias la='ls -a'
-alias lf='ls -FA'
-alias ll='ls -lhA'
-alias mv='mv -iv'
-alias cp='cp -i'
-alias rm='rm -i'
-alias cd..='cd ..'
-alias less='less -M'
-alias s='ssh -2'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
