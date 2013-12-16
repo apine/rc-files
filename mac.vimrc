@@ -1,7 +1,6 @@
 " My vimrc file.
-"
 " Maintainer:	Che-Pin Chang <cpchang (at) gmail.com>
-" Last change:	2013, Nov
+" Last change:	2013, Dec
 "
 " To use it, copy it to
 "     for Unix and OS/2:  ~/.vimrc
