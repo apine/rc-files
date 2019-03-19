@@ -1,6 +1,6 @@
 " My vimrc file.
 " Maintainer:	Che-Pin Chang <cpchang (at) gmail.com>
-" Last change:	2013, Dec
+" Last change:	2019, Feb
 "
 " To use it, copy it to
 "     for Unix and OS/2:  ~/.vimrc
@@ -10,26 +10,24 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" Vundle
-filetype off                 " required!
+" vim-plug Automatic installation
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" vim-plug (For Mac/Linux users)
+call plug#begin('~/.vim/plugged')
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
+" On-demand loading
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
-" My Bundles here:
-"
-" original repos on github
-Bundle 'The-NERD-tree'
-Bundle 'taglist.vim'
-Bundle 'Source-Explorer-srcexpl.vim'
-Bundle 'honza/vim-snippets'
-Bundle 'bling/vim-airline'
-
-filetype plugin indent on
+" For Windows users
+" call plug#begin('~/vimfiles/bundle')
+call plug#end()
 
 "Set mapleader
 let mapleader = ","
@@ -121,7 +119,7 @@ noremap <LEADER>b :e ++enc=big5<CR>:set tenc=big5<CR>
 " 256-color scheme
 set t_Co=256
 syntax on
-colorscheme cpchang 
+colorscheme gruvbox
 
 " show match {,[,( in yellow color
 set showmatch
@@ -130,38 +128,6 @@ hi MatchParen ctermbg=YELLOW
 " Highlight HTML tag in php file
 let php_htmlInStrings=1
 set cursorline 
-
-""""""""""""""""""""""""""""""
-" Status line
-""""""""""""""""""""""""""""""
-" Always hide the status line
-set laststatus=2
-set statusline=%<%F%<%{FileTime()}%<%h%m%r%=%-20.(line=%03l,col=%02c%V,totlin=%L%)\%h%m%r%=%-30(,BfNm=%n%Y%)\%P\%=
-
-fun! FileTime()
-    let ext = expand("%:e")
-    let fname = expand('%<')
-    let filename = fname . '.' . ext
-    let msg = ""
-    let msg = msg . " " . strftime("(Modified %b,%d %y %H:%M:%S)", getftime(filename))
-    return msg
-endf
-
-fun! CurTime()
-    let ftime = ""
-    let ftime = ftime . " " . strftime("%b,%d %y %H:%M:%S")
-    return ftime
-endf
-
-" ,g generates the header guard
-map <leader>g :call IncludeGuard()<CR>
-fun! IncludeGuard()
-	let basename = substitute(bufname(""), '.*/', '', '')
-	let guard = '_' . substitute(toupper(basename), '\.', '_', "H")
-	call append(0, "#ifndef " . guard)
-	call append(1, "#define " . guard)
-	call append( line("$"), "#endif // for #ifndef " . guard)
-endfun
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Folding
@@ -185,6 +151,9 @@ nnoremap <SPACE> za
 
 " NERD Tree 
 nnoremap <silent> <F5> :NERDTreeToggle<CR>
+" ^G Characters prefixing directory and file names in Nerdtree issue workaround
+" https://www.reddit.com/r/vim/comments/a4yzyt/g_characters_prefixing_directory_and_file_names/
+let g:NERDTreeNodeDelimiter = "\u00a0"
 
 "" taglist
 "let Tlist_Ctags_Cmd="/usr/bin/ctags"
@@ -192,20 +161,6 @@ nnoremap <silent> <F5> :NERDTreeToggle<CR>
 "let Tlist_Use_Right_Window = 1
 "nnoremap <silent> <F6> :TlistToggle<CR>
 "
-"" AutoComplPop Toggle Hotkey
-"
-"" omnicppcomplete 
-"set nocp
-"if v:version >= 700
-"	set omnifunc=syntaxcomplete#Complete " override built-in C omnicomplete with C++ OmniCppComplete plugin
-"	let OmniCpp_GlobalScopeSearch   = 1
-"	let OmniCpp_DisplayMode         = 1
-"	let OmniCpp_ShowScopeInAbbr     = 0 "do not show namespace in pop-up
-"	let OmniCpp_ShowPrototypeInAbbr = 1 "show prototype in pop-up
-"	let OmniCpp_ShowAccess          = 1 "show access in pop-up
-"	let OmniCpp_SelectFirstItem     = 1 "select first item in pop-up
-"	set completeopt=menuone,menu,longest
-"endif
 "map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 "
 "" --- SuperTab
