@@ -21,9 +21,17 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+" fugitive.vim: A Git wrapper so awesome
+Plug 'https://github.com/tpope/vim-fugitive.git'
+
+" fzf
+Plug 'junegunn/fzf', { 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
 
 " For Windows users
 " call plug#begin('~/vimfiles/bundle')
@@ -112,6 +120,11 @@ map <C-l> <ESC>:tabn<CR>
 map <C-t>n <ESC>:tabnew<CR><ESC>:e 
          
 set showtabline=2
+
+" Enable Powerline fonts for vim-airline
+let g:airline_powerline_fonts = 1
+" Fix airline theme to powerlineish (previous is gruvbox)
+let g:airline_theme='powerlineish'
 
 " Fast Big5 Mode
 noremap <LEADER>b :e ++enc=big5<CR>:set tenc=big5<CR>
