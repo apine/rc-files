@@ -52,6 +52,14 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;35;40'
 
+# https://support.apple.com/zh-tw/HT208050
+# Disable default zsh warning
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# Enable Bash Completion
+[ -f /usr/local/etc/bash_completion.d/brew ] && . /usr/local/etc/bash_completion.d/brew
+[ -f /usr/local/etc/bash_completion.d/git-completion.bash ] && . /usr/local/etc/bash_completion.d/git-completion.bash
+
 if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
 fi
